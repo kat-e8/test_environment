@@ -52,4 +52,8 @@ You need to import the library into the test environment and them perform a mapp
 Ignition only recognizes libraries inside of the pylib directory so when container is created a mapping is performed from the host
 to the container.
 
+Not all gateways require all modules to be installed all the time. You want the freedom to pick and decide which modules to install
+on which gateway. Docker allows you to that! Gateway backups DO NOT contain modules!
+environment:
+    GATEWAY_MODULES_ENABLED=mod1,mod2,...,modN
 

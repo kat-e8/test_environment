@@ -18,6 +18,7 @@ services:
       - IGNITION_EDITION=standard
       - GATEWAY_ADMIN_PASSWORD_FILE=/run/secrets/gateway-password
       - ACCEPT_IGNITION_EULA=Y
+      - GATEWAY_MODULES_ENABLED=alarm-notification,logix-driver,opc-ua,tag-historian
     command: >
       -n frontend-gateway
       -m 2048
