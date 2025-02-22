@@ -1,11 +1,21 @@
 services:
   frontend:
-    image:
-    hostname:
+    image: inductiveautomation/ignition:8.1.45
+    hostname: frontend
     ports:
+      - 9088:8088
     volumes:
+      - frontend-data:/usr/local/bin/ignition/data
     networks:
+      - frontend-network
     environment:
-    command:
+      - IGNITION_EDITION=standard
+      - GATEWAY_ADMIN_PASSWORD=katlego
+      - ACCEPT_IGNITION_EULA=Y
+    command: >
+      -n frontend-gateway
+      -m 2048
 networks:
+  frontend-network:
 volumes:
+  frontend-data:
