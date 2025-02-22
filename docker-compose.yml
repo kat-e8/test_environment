@@ -1,0 +1,11 @@
+services:
+  frontend:
+    image:
+    hostname:
+    ports:
+    volumes:
+    networks:
+    environment:
+    command:
+networks:
+volumes:
