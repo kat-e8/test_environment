@@ -11,9 +11,11 @@ services:
       - ./gw-init/frontend-metro-keystore:/usr/local/bin/ignition/data/local/metro-keystore
     networks:
       - frontend-network
+    secrets:
+      - gateway-password
     environment:
       - IGNITION_EDITION=standard
-      - GATEWAY_ADMIN_PASSWORD=katlego
+      - GATEWAY_ADMIN_PASSWORD_FILE=/run/secrets/gateway-password
       - ACCEPT_IGNITION_EULA=Y
     command: >
       -n frontend-gateway
@@ -65,6 +67,9 @@ services:
         aliases:
           - mail-server
 
+secrets:
+  gateway-password:
+    file: ./secrets/GATEWAY_PASSWORD
 networks:
   frontend-network:
   backend-network:
