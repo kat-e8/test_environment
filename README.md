@@ -38,4 +38,18 @@ docker compose down -v
 is used to stop containers and remove their volumes
 sidenote: compose is to docker what EAM Controller is to EAM Agent
 
+Okay, using a hostname instead of an ip when setting up a gateway network is better. When containers start in a different environment
+they get assigned new ips and your connections will break. Instead give your containers names and use names to make gateway connection.
+
+So now that you've made the change from using IP to using container name, you need to update the back-end gwbk file, down all your containers
+and their volume and rebuild them again. It'll only take ta second.
+
+Going through the trouble of setting all of this up makes your test environment trully portable. At this point, you can zip up your TEST_ENVIRO folder and when you use it in another docker environment, the gateways will start with the same connections etc. Dope!
+
+What if I want to use libraries in my gateway?
+You need to import the library into the test environment and them perform a mapping between the host and the container
+./pylib/library.py:/usr/local/bin/ignition/user-lib/pylib/library.py
+Ignition only recognizes libraries inside of the pylib directory so when container is created a mapping is performed from the host
+to the container.
+
 

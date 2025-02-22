@@ -9,6 +9,7 @@ services:
       - ./gw-init/frontend.gwbk:/restore.gwbk
       - ./gw-init/frontend-uuid.txt:/usr/local/bin/ignition/data/.uuid
       - ./gw-init/frontend-metro-keystore:/usr/local/bin/ignition/data/local/metro-keystore
+      - ./pylib/speciallibrary.py:/usr/local/bin/ignition/user-lib/pylib/speciallibrary.py
     networks:
       - frontend-network
     secrets:
