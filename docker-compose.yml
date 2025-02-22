@@ -6,6 +6,9 @@ services:
       - 9088:8088
     volumes:
       - frontend-data:/usr/local/bin/ignition/data
+      - ./gw-init/frontend.gwbk:/restore.gwbk
+      - ./gw-init/frontend-uuid.txt:/usr/local/bin/ignition/data/.uuid
+      - ./gw-init/frontend-metro-keystore:/usr/local/bin/ignition/data/local/metro-keystore
     networks:
       - frontend-network
     environment:
@@ -15,6 +18,7 @@ services:
     command: >
       -n frontend-gateway
       -m 2048
+      -r /restore.gwbk
   backend:
     image: inductiveautomation/ignition:8.1.45
     hostname: backend
@@ -22,6 +26,9 @@ services:
       - 9090:8088
     volumes:
       - backend-data:/usr/local/bin/ignition/data
+      - ./gw-init/backend.gwbk:/restore.gwbk
+      - ./gw-init/backend-uuid.txt:/usr/local/bin/ignition/data/.uuid
+      - ./gw-init/backend-metro-keystore:/usr/local/bin/ignition/data/local/metro-keystore
     networks:
       - frontend-network
       - backend-network
@@ -31,7 +38,8 @@ services:
       - ACCEPT_IGNITION_EULA=Y
     command: >
       -n backend-gateway
-      -m 1024
+      -m 2048
+      -r /restore.gwbk
   db:
     image: mariadb:10.10.2
     ports:
