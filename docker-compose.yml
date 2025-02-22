@@ -47,6 +47,15 @@ services:
       - MARIADB_DATABASE=ignition
       - MARIADB_USER=ignition
       - MARIADB_PASSWORD=ignition
+  smtp:
+    image: dockage/mailcatcher:0.8.2
+    ports:
+      - 1080:1080
+      - 1025:1025
+    networks:
+      backend-network:
+        aliases:
+          - mail-server
 
 networks:
   frontend-network:
