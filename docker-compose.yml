@@ -15,7 +15,27 @@ services:
     command: >
       -n frontend-gateway
       -m 2048
+  backend:
+    image: inductiveautomation/ignition:8.1.45
+    hostname: backend
+    ports:
+      - 9090:8088
+    volumes:
+      - backend-data:/usr/local/bin/ignition/data
+    networks:
+      - frontend-network
+      - backend-network
+    environment:
+      - IGNITION_EDITION=standard
+      - GATEWAY_ADMIN_PASSWORD=gagoopane
+      - ACCEPT_IGNITION_EULA=Y
+    command: >
+      -n backend-gateway
+      -m 1024
+
 networks:
   frontend-network:
+  backend-network:
 volumes:
   frontend-data:
+  backend-data:
